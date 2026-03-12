@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Shorts Tracker</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{
+font-family:Arial;
+max-width:600px;
+margin:auto;
+padding:20px;
+}
+input{
+width:100%;
+padding:10px;
+margin:5px 0;
+}
+button{
+width:100%;
+padding:10px;
+background:black;
+color:white;
+}
+</style>
+</head>
+
+<body>
+
+<h2>쇼츠 기록</h2>
+
+<input id="date" placeholder="날짜">
+<input id="product" placeholder="제품">
+<input id="hook" placeholder="후킹">
+<input id="views" placeholder="조회수">
+
+<button onclick="saveData()">저장</button>
+
+<h3>기록</h3>
+<div id="list"></div>
+
+<script>
+
+let data=[]
+
+function saveData(){
+
+let item={
+date:date.value,
+product:product.value,
+hook:hook.value,
+views:views.value
+}
+
+data.push(item)
+
+showData()
+
+}
+
+function showData(){
+
+list.innerHTML=""
+
+data.forEach(i=>{
+
+list.innerHTML+=`
+<p>
+${i.date} / ${i.product} / 조회수 ${i.views}
+</p>
+`
+
+})
+
+}
+
+</script>
+
+</body>
+</html>
