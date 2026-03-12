@@ -1,72 +1,99 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Shorts Tracker</title>
+<title>쇼츠 분석기</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+
 <style>
+
 body{
 font-family:Arial;
 max-width:600px;
 margin:auto;
 padding:20px;
 }
+
 input{
 width:100%;
 padding:10px;
 margin:5px 0;
 }
+
 button{
 width:100%;
 padding:10px;
 background:black;
 color:white;
+margin-top:5px;
 }
+
+.card{
+border:1px solid #ddd;
+padding:10px;
+margin-top:10px;
+}
+
 </style>
+
 </head>
 
 <body>
 
-<h2>쇼츠 기록</h2>
+<h2>쇼츠 분석 기록</h2>
 
-<input id="date" placeholder="날짜">
 <input id="product" placeholder="제품">
-<input id="hook" placeholder="후킹">
+<input id="hook" placeholder="후킹 문장">
 <input id="views" placeholder="조회수">
 
-<button onclick="saveData()">저장</button>
+<button onclick="save()">기록 저장</button>
+<button onclick="sortViews()">조회수 순 정렬</button>
 
-<h3>기록</h3>
+<h3>영상 기록</h3>
+
 <div id="list"></div>
 
 <script>
 
 let data=[]
 
-function saveData(){
+function save(){
 
 let item={
-date:date.value,
 product:product.value,
 hook:hook.value,
-views:views.value
+views:Number(views.value)
 }
 
 data.push(item)
 
-showData()
+show()
 
 }
 
-function showData(){
+function sortViews(){
+
+data.sort((a,b)=>b.views-a.views)
+
+show()
+
+}
+
+function show(){
 
 list.innerHTML=""
 
 data.forEach(i=>{
 
 list.innerHTML+=`
-<p>
-${i.date} / ${i.product} / 조회수 ${i.views}
-</p>
+
+<div class="card">
+
+제품 : ${i.product}<br>
+후킹 : ${i.hook}<br>
+조회수 : ${i.views}
+
+</div>
+
 `
 
 })
