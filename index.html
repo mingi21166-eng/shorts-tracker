@@ -4,6 +4,8 @@
 <title>쇼츠 분석기</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <style>
 
 body{
@@ -48,6 +50,8 @@ margin-top:10px;
 <button onclick="save()">기록 저장</button>
 <button onclick="sortViews()">조회수 순 정렬</button>
 
+<canvas id="chart"></canvas>
+
 <h3>영상 기록</h3>
 
 <div id="list"></div>
@@ -67,6 +71,7 @@ views:Number(views.value)
 data.push(item)
 
 show()
+drawChart()
 
 }
 
@@ -75,6 +80,7 @@ function sortViews(){
 data.sort((a,b)=>b.views-a.views)
 
 show()
+drawChart()
 
 }
 
@@ -95,6 +101,27 @@ list.innerHTML+=`
 </div>
 
 `
+
+})
+
+}
+
+function drawChart(){
+
+let labels=data.map(i=>i.product)
+let views=data.map(i=>i.views)
+
+new Chart(document.getElementById("chart"),{
+
+type:"bar",
+
+data:{
+labels:labels,
+datasets:[{
+label:"조회수",
+data:views
+}]
+}
 
 })
 
